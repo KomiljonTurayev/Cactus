@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Cactus</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_search">title_search</string>
+    <string name="title_product">title_product</string>
+    <string name="title_label">title_label</string>
+    <string name="cactus_shop">Cactus Shop</string>
+    <string name="order_and_get_your_cactus">Order and get your cactus</string>
+    <string name="home">Home</string>
+    <string name="succulents">Succulents</string>
+    <string name="cactus">Cactus</string>
+    <string name="view_all">View All</string>
+</resources>
