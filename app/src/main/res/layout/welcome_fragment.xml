@@ -48,7 +48,7 @@
             android:layout_marginTop="12dp"
             android:fontFamily="@font/sfprotext"
             android:text="@string/order_and_get_your_cactus"
-            android:textColor="@color/text_color2"
+            android:textColor="@color/text_color_secondary"
             app:layout_constraintEnd_toEndOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
