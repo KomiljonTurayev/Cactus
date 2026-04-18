@@ -19,7 +19,7 @@ class WelcomeFragment : Fragment(R.layout.welcome_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
-        binding.btnStarted.setOnClickListener {
+        binding.btnNext.setOnClickListener {
             findNavController().navigate(R.id.action_welcomeFragment_to_navigation_home)
         }
     }
