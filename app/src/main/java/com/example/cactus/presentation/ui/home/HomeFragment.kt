@@ -29,7 +29,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setUI() {
-        adapterCactus = CactusHomeAdapter()
+        adapterCactus = CactusHomeAdapter(onAddClick = { cactus ->
+            viewModel.addToBasket(cactus)
+            Toast.makeText(requireContext(), "${cactus.title} added to basket", Toast.LENGTH_SHORT).show()
+        })
         binding.recyclerCactusHome.apply {
             adapter = adapterCactus
             layoutManager = GridLayoutManager(context, 2)

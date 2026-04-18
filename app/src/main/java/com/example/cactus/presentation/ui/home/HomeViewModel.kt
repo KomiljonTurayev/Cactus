@@ -13,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val cactusRepository: CactusRepository
+    private val cactusRepository: CactusRepository,
+    private val basketRepository: BasketRepository
 ) : ViewModel() {
 
     private val _state = MutableLiveData<HomeUiState>()
@@ -21,6 +22,10 @@ class HomeViewModel @Inject constructor(
 
     init {
         getCactus()
+    }
+
+    fun addToBasket(cactus: Cactus) {
+        basketRepository.addToBasket(cactus)
     }
 
     private fun getCactus() {

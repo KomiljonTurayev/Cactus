@@ -1,6 +1,8 @@
 package com.example.cactus.di
 
+import com.example.cactus.data.repository.BasketRepositoryImpl
 import com.example.cactus.data.repository.CactusRepositoryImpl
+import com.example.cactus.domain.repository.BasketRepository
 import com.example.cactus.domain.repository.CactusRepository
 import dagger.Binds
 import dagger.Module
@@ -17,4 +19,10 @@ abstract class RepositoryModule {
     abstract fun bindCactusRepository(
         cactusRepositoryImpl: CactusRepositoryImpl
     ): CactusRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindBasketRepository(
+        basketRepositoryImpl: BasketRepositoryImpl
+    ): BasketRepository
 }
