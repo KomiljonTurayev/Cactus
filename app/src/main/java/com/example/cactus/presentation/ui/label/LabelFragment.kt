@@ -1,32 +1,21 @@
 package com.example.cactus.presentation.ui.label
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.cactus.R
+import com.example.cactus.databinding.LabelFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class LabelFragment : Fragment() {
+@AndroidEntryPoint
+class LabelFragment : Fragment(R.layout.label_fragment) {
 
-    companion object {
-        fun newInstance() = LabelFragment()
+    private val viewModel: LabelViewModel by viewModels()
+    private val binding by viewBinding(LabelFragmentBinding::bind)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
-
-    private lateinit var viewModel: LabelViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.label_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LabelViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

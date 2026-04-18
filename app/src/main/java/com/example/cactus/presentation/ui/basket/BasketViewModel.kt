@@ -1,7 +1,9 @@
 package com.example.cactus.presentation.ui.basket
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class BasketViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+@HiltViewModel
+class BasketViewModel @Inject constructor() : ViewModel() {
 }

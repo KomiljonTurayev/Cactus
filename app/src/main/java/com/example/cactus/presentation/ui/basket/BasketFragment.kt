@@ -1,32 +1,21 @@
 package com.example.cactus.presentation.ui.basket
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.cactus.R
+import com.example.cactus.databinding.BasketFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class BasketFragment : Fragment() {
+@AndroidEntryPoint
+class BasketFragment : Fragment(R.layout.basket_fragment) {
 
-    companion object {
-        fun newInstance() = BasketFragment()
+    private val viewModel: BasketViewModel by viewModels()
+    private val binding by viewBinding(BasketFragmentBinding::bind)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
-
-    private lateinit var viewModel: BasketViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.basket_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(BasketViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

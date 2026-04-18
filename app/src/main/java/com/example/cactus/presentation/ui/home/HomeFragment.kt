@@ -2,61 +2,60 @@ package com.example.cactus.presentation.ui.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.cactus.R
-import com.example.cactus.data.remote.dto.CactusDto
 import com.example.cactus.databinding.FragmentHomeBinding
 import com.example.cactus.presentation.ui.home.adapters.CactusHomeAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    val viewModel: HomeViewModel by viewModels()
-    private val _binding by viewBinding(FragmentHomeBinding::bind)
-    var recyclerView = _binding.recyclerCactusHome
-    val recyclerViewSuc = _binding.recyclerSucculents
+    private val viewModel: HomeViewModel by viewModels()
+    private val binding by viewBinding(FragmentHomeBinding::bind)
     private lateinit var adapterCactus: CactusHomeAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        viewModel.apply {
-//            homeScreenLiveData.observe(viewLifecycleOwner, homeFramgentObserver)
-//        }
-
-
         setUI()
-        viewModel.getCactus()
-        viewModel.cactusLiveData.observe(requireActivity()) { response ->
-            adapterCactus.setData(response as ArrayList<CactusDto>)
-        }
-
+        observeState()
     }
 
     private fun setUI() {
-        adapterCactus = CactusHomeAdapter(requireContext(), ArrayList())
-        recyclerView.adapter = adapterCactus
-        recyclerViewSuc.adapter = adapterCactus
-        recyclerView.apply {
+        adapterCactus = CactusHomeAdapter()
+        binding.recyclerCactusHome.apply {
+            adapter = adapterCactus
+            layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)
-            recyclerView.layoutManager =
-                GridLayoutManager(activity, 2)
-
-            recyclerViewSuc.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
+        }
+        
+        binding.recyclerSucculents.apply {
+            adapter = adapterCactus // Reusing adapter might be okay if data is same, but usually better to have separate instances if lists differ.
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
     }
 
-    private val homeFramgentObserver = Observer<List<Unit>> { it ->
-//        val adapterCactus = CactusHomeAdapter(it)
-
+    private fun observeState() {
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            // Handle loading
+            binding.progressBar.isVisible = state.isLoading
+            
+            // Handle data
+            if (state.cactusList.isNotEmpty()) {
+                adapterCactus.setData(state.cactusList)
+            }
+            
+            // Handle error
+            if (state.error.isNotBlank()) {
+                Toast.makeText(requireContext(), state.error, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
-
-
-
 }

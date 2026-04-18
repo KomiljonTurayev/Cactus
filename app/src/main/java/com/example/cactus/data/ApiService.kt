@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface ApiService{
 
-    @GET("posts")
-    suspend fun getPosts():List<CactusDto>
+    @GET("photos")
+    suspend fun getPosts(): List<CactusDto>
 }

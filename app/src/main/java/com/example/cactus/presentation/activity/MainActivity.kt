@@ -10,6 +10,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.cactus.R
 import com.example.cactus.databinding.ActivityMainBinding
 
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -28,9 +31,9 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
-                R.id.navigation_search,
-                R.id.navigation_product,
-                R.id.navigation_label,
+                R.id.searchFragment,
+                R.id.basketFragment,
+                R.id.labelFragment,
             )
         )
 

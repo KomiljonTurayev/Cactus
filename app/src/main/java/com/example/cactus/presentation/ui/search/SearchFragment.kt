@@ -1,32 +1,22 @@
 package com.example.cactus.presentation.ui.search
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.cactus.R
+import com.example.cactus.databinding.SearchFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class SearchFragment : Fragment() {
+@AndroidEntryPoint
+class SearchFragment : Fragment(R.layout.search_fragment) {
 
-    companion object {
-        fun newInstance() = SearchFragment()
+    private val viewModel: SearchViewModel by viewModels()
+    private val binding by viewBinding(SearchFragmentBinding::bind)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Implementation for search
     }
-
-    private lateinit var viewModel: SearchViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.search_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }
